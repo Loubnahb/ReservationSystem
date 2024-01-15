@@ -1,0 +1,20 @@
+#header {
+    background: #FFFFFF; /* Replace with the actual color code */
+}
+
+#site-name a {
+    color: #0B3051; /* Replace with the actual text color code */
+    font-size: 24px;
+    /* Add other styles as needed */
+}
+
+/* Hide the default search box */
+#searchbar {
+    display: none;
+}
+
+/* Styling for the welcome message and log out link */
+.user-tools {
+    float: right;
+    /* Add other styles as needed */
+}

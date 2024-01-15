@@ -1,0 +1,88 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static admin_extras %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <!-- Dashboard Row for Summary Cards -->
+    <div class="row">
+        <!-- Employees Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body bg-cyan">
+                    <i class="fas fa-users fa-2x"></i> <!-- Font Awesome icon -->
+                    <h5 class="card-title">{% trans 'Nombre des employés' %}</h5>
+                    <p class="card-text"><strong>{{ employee_count }}</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Meeting Rooms Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body bg-yellow">
+                    <i class="fas fa-door-open fa-2x"></i> <!-- Font Awesome icon -->
+                    <h5 class="card-title">{% trans 'Nombre des Salles' %}</h5>
+                    <p class="card-text"><strong>{{ room_count }}</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reserved Rooms Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body bg-pink">
+                    <i class="fas fa-calendar-check fa-2x"></i> <!-- Font Awesome icon -->
+                    <h5 class="card-title">{% trans 'Nombre des Salles réservées' %}</h5>
+                    <p class="card-text"><strong>{{ reserved_room_count }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Upcoming Meetings Table -->
+    <h2 class="mt-5">{% trans 'Les réunions proches' %}</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">{% trans 'Nom' %}</th>
+                <th scope="col">{% trans 'Prénom' %}</th>
+                <th scope="col">{% trans 'Nom de la salle' %}</th>
+                <th scope="col">{% trans 'Titre de Réunion' %}</th>
+                <th scope="col">{% trans 'Heure Début' %}</th>
+                <th scope="col">{% trans 'Heure Fin' %}</th>
+            </tr>
+        </thead>
+       
+        <tbody>
+            <!-- Dynamically insert upcoming meetings here -->
+            {% for meeting in upcoming_meetings %}
+            <tr>
+                <td>{{ meeting.creator.get_full_name }}</td>
+                <td>{{ meeting.salle.nom }}</td>
+                <td>{{ meeting.title }}</td>
+                <td>{{ meeting.date|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ meeting.start_time|time:"TIME_FORMAT" }}</td>
+                <td>{{ meeting.end_time|time:"TIME_FORMAT" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">{% trans 'No upcoming meetings' %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> <!-- Font Awesome for icons -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}"/>
+<style>
+    .bg-cyan { background-color: #2ecc71; }
+    .bg-yellow { background-color: #f1c40f; }
+    .bg-pink { background-color: #e91e63; }
+    .card { border: none; }
+    .card .card-body { padding: 2rem; color: white; }
+    .card .fa-2x { margin-bottom: 1rem; }
+</style>
+{% endblock %}
