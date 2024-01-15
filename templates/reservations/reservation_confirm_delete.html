@@ -1,0 +1,11 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+  <h2>Confirm Reservation Cancellation</h2>
+  <p>Are you sure you want to cancel this reservation: "{{ reservation.title }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+    <a href="{% url 'reservations:admin_reservations_list' %}" class="btn btn-secondary">Back to List</a>
+  </form>
+{% endblock %}

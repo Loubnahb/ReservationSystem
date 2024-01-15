@@ -1,0 +1,33 @@
+{% extends "user/base_user.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="container mt-3">
+  <h2 class="mb-4">Salles disponibles</h2> <!-- Added margin-bottom class -->
+  <div class="row">
+    {% for salle in salles %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if salle.image %}
+            <img class="card-img-top" src="{{ salle.image.url }}" alt="{{ salle.nom }}" style="height: 150px; object-fit: cover;">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ salle.nom }}</h5>
+            <p class="card-text">
+              <strong>Capacité:</strong> {{ salle.capacite }}<br>
+              <strong>Adresse:</strong> {{ salle.adresse }}<br>
+              <strong>Description:</strong> {{ salle.description }}<br>
+              <strong>Équipements:</strong> {{ salle.equipements }}
+            </p>
+            <a href="{% url 'reservations:create_reservation' salle.id %}" class="btn btn-primary">Reserver</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p>No salles found.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

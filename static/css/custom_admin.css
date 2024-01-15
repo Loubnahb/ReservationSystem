@@ -1,0 +1,27 @@
+/* Styles for the admin header background */
+#header, .dashboard-header, .navbar {
+    background-color: #FFFFFF; /* White background */
+}
+
+/* Styles for the auth links (log in and log out) */
+#header .user-tools a.auth-link,
+#header .user-tools a.logout-link,
+#header .user-tools form #logout-form a.logout-link {
+    color: #000000 !important; /* Black text */
+    background-color: transparent !important; /* Transparent background */
+    text-decoration: underline !important; /* Underline to indicate clickability */
+    padding: 0 !important; /* Remove padding */
+    border: none !important; /* Remove borders */
+    box-shadow: none !important; /* Remove box shadow if any */
+    font-weight: normal !important; /* Normal font weight */
+    font-size: 1rem !important; /* Standard font size */
+}
+
+/* Remove hover effects */
+#header .user-tools a.auth-link:hover,
+#header .user-tools a.logout-link:hover,
+#header .user-tools form #logout-form a.logout-link:hover {
+    color: #000000 !important; /* Keep text color black on hover */
+    background-color: transparent !important; /* Keep background transparent on hover */
+    text-decoration: none !important; /* Optional: remove underline on hover */
+}

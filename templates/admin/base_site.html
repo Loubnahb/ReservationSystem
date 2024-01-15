@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}Système réservation de salles{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}"/>
+<link rel="shortcut icon" type="image/jpeg" href="{% static 'images/logo.jpg' %}" />
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name" class="h2">
+  <a href="{% url 'admin:index' %}" class="text-dark text-decoration-none">
+    <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="mr-2" style="width: 45px; height: 45px; vertical-align: middle;" />
+    Système réservation de salles
+  </a>
+</h1>
+{% endblock %}
+
+{% block usertools %}
+{% if user.is_authenticated %}
+  <div class="user-tools text-right">
+    <span class="text-secondary mr-2">
+      <strong>{% trans 'Welcome,' %}</strong> {{ user.username }}
+    </span>
+    <!-- Logout form -->
+    <form action="{% url 'admin:logout' %}" method="post" id="logout-form" style="display: inline;">
+      {% csrf_token %}
+      <a href="#" onclick="document.getElementById('logout-form').submit(); return false;" class="auth-link">
+        {% trans 'Log out' %}
+      </a>
+    </form>
+  </div>
+{% else %}
+  <a href="{% url 'admin:login' %}" class="auth-link">{% trans 'Log in' %}</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,92 @@
+/* Header Styles */
+.user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff; /* Replace with your header background color */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional shadow for depth */
+    top: 0;
+    height: 60px; /* Set the header height here, adjust as needed */
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-link img {
+    max-height: 50px; /* Adjust if your logo is a different size */
+    width: auto;
+    margin-right: 10px;
+}
+
+.site-name {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 60px); /* Calculate the height minus the header */
+    position: fixed;
+    top: 60px; /* Set the top position exactly at the header height */
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 500;
+    padding-top: 0; /* No additional space needed at the top */
+}
+
+.sidebar .nav-link {
+    padding: 15px;
+    font-size: 18px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Adjust the main content area */
+main {
+    margin-left: 250px;
+    margin-top: 60px; /* Same as the top position of the sidebar */
+    padding: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .user-header {
+        position: relative;
+        height: auto; /* Adjust header height for smaller devices */
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        padding-top: 60px; /* Adjust if the header height changes on smaller screens */
+    }
+    
+    main {
+        margin-left: 0;
+        margin-top: 0; /* Remove the margin-top on smaller screens */
+        padding: 10px;
+    }
+}

@@ -1,0 +1,34 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- Reservation Form -->
+    <div class="col-md-6">
+      <h2>{{ reservation.id|default:"Create" }} Reservation</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% if reservation.id %}Save{% else %}Reserve{% endif %}</button>
+      </form>
+    </div>
+
+    <!-- Salle Details -->
+    {% if reservation.salle %}
+    <div class="col-md-6">
+      <div class="card">
+        <img class="card-img-top img-fluid" src="{{ reservation.salle.image.url }}" alt="Salle image" style="max-width: 100%; height: auto;">
+        <div class="card-body">
+          <h5 class="card-title">{{ reservation.salle.nom }}</h5>
+          <p class="card-text">Capacité: {{ reservation.salle.capacite }}</p>
+          <p class="card-text">Adresse: {{ reservation.salle.adresse }}</p>
+          <p class="card-text">Description: {{ reservation.salle.description }}</p>
+          <p class="card-text">Équipements: {{ reservation.salle.equipements }}</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

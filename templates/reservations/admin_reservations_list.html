@@ -1,0 +1,35 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<div class="container mt-3">
+  <h2>All Reservations</h2>
+  <div class="row">
+    {% for reservation in reservations %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{{ reservation.salle.image.url }}" alt="Salle image" style="height: 150px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ reservation.title }}</h5>
+            <p class="card-text">
+              <strong>Date:</strong> {{ reservation.date|date:"d M Y" }}<br>
+              <strong>Time:</strong> {{ reservation.start_time|time:"H:i" }} - {{ reservation.end_time|time:"H:i" }}<br>
+              <strong>Salle:</strong> {{ reservation.salle.nom }}<br>
+              <strong>Created by:</strong> {{ reservation.creator.username }}<br>
+              <strong>Attendees:</strong> 
+              {% for attendee in reservation.attendees.all %}{{ attendee.username }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'reservation_change' reservation.pk %}" class="btn btn-primary btn-sm">Modify</a>
+            <a href="{% url 'reservation_delete' reservation.pk %}" class="btn btn-danger btn-sm">Cancel</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p>No reservations found.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
